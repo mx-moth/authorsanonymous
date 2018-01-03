@@ -1,0 +1,28 @@
+import os
+
+from dj_database_url import parse
+
+from authorsanonymous.settings import *  # noqa
+from authorsanonymous.settings import INSTALLED_APPS
+
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+DEBUG = bool(int(os.environ['DJANGO_DEBUG']))
+
+HOSTNAME = os.environ['DJANGO_HOSTNAME']
+PROTOCOL = os.environ['DJANGO_PROTOCOL']
+
+ALLOWED_HOSTS = [HOSTNAME]
+BASE_URL = '{}://{}'.format(PROTOCOL, HOSTNAME)
+
+DEFAULT_FILE_STORAGE = 'authorsanonymous.storage.S3MediaStorage'
+STATICFILES_STORAGE = 'authorsanonymous.storage.S3StaticStorage'
+
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_AUTO_CREATE_BUCKET = True
+AWS_QUERYSTRING_AUTH = False
+
+DATABASES = {
+    'default': parse(os.environ['DATABASE_URL']),
+}

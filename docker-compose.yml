@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: Dockerfile
+
+        command: ./manage.py runserver 0.0.0.0:8000
+
+        ports:
+            - '80:8000'
+
+        volumes:
+            - './authorsanonymous:/app/authorsanonymous'
+            - './Makefile:/app/Makefile'
+            - './manage.py:/app/manage.py'
+            - './data/:/app/data/'
+            - './deploy:/app/deploy/'
+            - './dev/settings.py:/app/devsettings.py'
+
+        environment:
+            - 'DJANGO_SETTINGS_MODULE=devsettings'
+
+        depends_on:
+            - database
+
+    database:
+        image: postgres
+        ports:
+            - '5432:5432'

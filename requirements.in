@@ -1,0 +1,7 @@
+django~=1.11.0
+django-storages~=1.6.5
+wagtail~=1.13.0
+pillow==4.3.0  # Version from alpine linux
+boto3~=1.5.8
+dj-database-url
+psycopg2~=2.7.3
