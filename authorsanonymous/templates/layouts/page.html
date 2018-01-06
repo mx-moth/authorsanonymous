@@ -1,5 +1,11 @@
 {% extends "layouts/base.html" %}
 
+{% load wagtailuserbar %}
+
 {% block title %}
 {{ page.seo_title|default:page.title }}
+{% endblock %}
+
+{% block footer %}
+{% wagtailuserbar %}
 {% endblock %}

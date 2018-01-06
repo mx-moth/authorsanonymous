@@ -25,7 +25,16 @@ services:
         depends_on:
             - database
 
+        links:
+            - mail
+
     database:
         image: postgres
         ports:
             - '5432:5432'
+
+
+    mail:
+        image: djfarrelly/maildev
+        ports:
+            - "9000:80"

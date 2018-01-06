@@ -1,11 +1,8 @@
 <!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 {% load static from staticfiles %}
+{% load wagtailcore_tags %}
+{% load authorsanonymous_tags %}
 	<head>
 		<meta charset="utf-8" />
 		<title>{% block title %}{% endblock %}</title>
@@ -15,8 +12,8 @@
 	<body>
 
 		<div class="page-wrapper">
-			<header class="page-header alt">
-				<h1><a href="/">{{ request.site.name }}</a></h1>
+		<header class="page-header {% block page_header_class %}{% endblock %}">
+				<h1><a href="/">{{ settings.authorsanonymous.SiteCopy.site_title }}</a></h1>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
@@ -26,11 +23,14 @@
 				<div class="inner">
 					<h2>Menu</h2>
 					<ul class="links">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="generic.html">Generic</a></li>
-						<li><a href="elements.html">Elements</a></li>
-						<li><a href="#">Log In</a></li>
-						<li><a href="#">Sign Up</a></li>
+					{% with homepage=request.site.root_page %}
+						<li><a href="{% pageurl homepage %}">Home</a></li>
+						{% for child in homepage.get_children.live.in_menu %}
+						{% pageurlblock child as href %}
+						<li><a href="{{ href }}">{{ child }}</a></li>
+						{% endpageurlblock %}
+						{% endfor %}
+					{% endwith %}
 					</ul>
 					<a href="#" class="close">Close</a>
 				</div>
@@ -42,44 +42,54 @@
 
 			<footer class="page-footer">
 				<div class="inner">
-					<h2 class="major">Get in touch</h2>
-					<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-					<form method="post" action="#">
+					{% with contact_details=settings.authorsanonymous.ContactDetails %}
+					<h2 class="major">{{ settings.authorsanonymous.SiteCopy.contact_title }}</h2>
+					{{ settings.authorsanonymous.SiteCopy.contact_body|richtext }}
+
+					{% if contact_details.email and show_contact_form %}
+					<form method="post" action="{% url "contact" %}">
+						{% csrf_token %}
+						{% for field in contact_form %}
 						<div class="field">
-							<label for="name">Name</label>
-							<input type="text" name="name" />
+							<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+							{{ field }}
 						</div>
-						<div class="field">
-							<label for="email">Email</label>
-							<input type="email" name="email" />
-						</div>
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" rows="4"></textarea>
-						</div>
+						{% endfor %}
 						<ul class="actions">
 							<li><input type="submit" value="Send Message" /></li>
 						</ul>
 					</form>
+					{% endif %}
 					<ul class="contact">
-						<li class="fa-home">
-							Untitled Inc<br />
-							1234 Somewhere Road Suite #2894<br />
-							Nashville, TN 00000-0000
-						</li>
-						<li class="fa-phone">(000) 000-0000</li>
-						<li class="fa-envelope"><a href="#">information@untitled.tld</a></li>
-						<li class="fa-twitter"><a href="#">twitter.com/untitled-tld</a></li>
-						<li class="fa-facebook"><a href="#">facebook.com/untitled-tld</a></li>
-						<li class="fa-instagram"><a href="#">instagram.com/untitled-tld</a></li>
+						{% if contact_details.address %}
+							<li class="fa-home">{{ contact_details.address|linebreaksbr }}</li>
+						{% endif %}
+						{% if contact_details.phone %}
+							<li class="fa-phone">{{ contact_details.phone }}</li>
+						{% endif %}
+						{% if contact_details.email and contact_details.email_public %}
+							<li class="fa-envelope"><a href="mailto:{{ contact_details.email }}">{{ contact_details.email }}</a></li>
+						{% endif %}
+						{% if contact_details.facebook_url %}
+							<li class="fa-facebook"><a href="{{ contact_details.facebook_url}}">{{ contact_details.nice_facebook_url }}</a></li>
+						{% endif %}
+						{% if contact_details.twitter_handle %}
+							<li class="fa-twitter"><a href="{{ contact_details.twitter_url }}">@{{ contact_details.twitter_handle }}</a></li>
+						{% endif %}
+						{% if contact_details.instagram_handle %}
+							<li class="fa-instagram"><a href="{{ contact_details.instagram_url }}">@{{ contact_details.instagram_handle }}</a></li>
+						{% endif %}
 					</ul>
 					<ul class="copyright">
-						<li>&copy; Untitled Inc. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; {{ settings.authorsanonymous.SiteCopy.copyright }}</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
+					{% endwith %}
 				</div>
 			</footer>
 
 		</div>
+
+		{% block footer %}{% endblock %}
 
 		{% block scripts %}
 		<script src="{% static 'js/skel.min.js' %}"></script>

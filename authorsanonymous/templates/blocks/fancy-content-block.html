@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+<section class="wrapper {{ section_alt }} {{ section_style }}">
+	<div class="inner">
+		<h2 class="major">{{ value.title }}</h2>
+		{% include_block value.content %}
+	</div>
+</section>
