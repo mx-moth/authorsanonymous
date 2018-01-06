@@ -26,3 +26,6 @@ AWS_QUERYSTRING_AUTH = False
 DATABASES = {
     'default': parse(os.environ['DATABASE_URL']),
 }
+
+EMAIL_BACKEND = 'django_ses.SESBackend'
+SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ['DJANGO_FROM_EMAIL']

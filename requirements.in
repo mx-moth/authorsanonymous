@@ -5,3 +5,4 @@ pillow==4.3.0  # Version from alpine linux
 boto3~=1.5.8
 dj-database-url
 psycopg2~=2.7.3
+django-ses~=0.8.4

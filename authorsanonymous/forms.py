@@ -33,6 +33,6 @@ class ContactForm(forms.Form):
             subject=self.subject_template.format(**data),
             body=self.body_template.format(**data),
             to=[contact_details.email],
-            reply_to=['"{name}" <email>'.format(**data)],
+            reply_to=['"{name}" <{email}>'.format(**data)],
         )
         return message.send()
