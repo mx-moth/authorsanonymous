@@ -1,4 +1,5 @@
 from django.core.mail import send_mail
+from django.shortcuts import render
 
 from .forms import ContactForm
 
@@ -16,5 +17,6 @@ def contact_form(request):
 
     return render(request, 'layouts/contact.html', {
         'form': form,
+        'show_contact_form': False,
         'did_send': did_send,
     })

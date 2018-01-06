@@ -1911,6 +1911,19 @@
 				margin-top: 0;
 			}
 
+			form .field.has-error input[type="text"],
+			form .field.has-error input[type="password"],
+			form .field.has-error input[type="email"],
+			form .field.has-error input[type="tel"],
+			form .field.has-error select,
+			form .field.has-error textarea {
+				border-color: rgb(255, 127, 127);
+			}
+
+			form .field.has-error .error-message {
+				color: rgb(255, 127, 127);
+			}
+
 		form > :last-child {
 			margin-bottom: 0;
 		}

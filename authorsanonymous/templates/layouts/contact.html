@@ -1,0 +1,42 @@
+{% extends "layouts/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block title %}{{ settings.authorsanonymous.SiteCopy.contact_title }}{% endblock %}
+
+{% block content %}
+<main>
+	<header>
+		<div class="inner">
+			<h2>{{ settings.authorsanonymous.SiteCopy.contact_title }}</h2>
+		</div>
+	</header>
+
+	<div class="wrapper">
+		<div class="inner">
+			{% if did_send %}
+			<p>Thank for your message!</p>
+			{% else %}
+			<form method="post" action="{% url "contact" %}">
+				{% csrf_token %}
+				{% for field in form %}
+				<div class="field {% if field.errors %}has-error{% endif %}">
+					<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+					{{ field }}
+					{% if field.errors %}
+					{% for error in field.errors %}
+					<p class="error-message">{{ error }}</p>
+					{% endfor %}
+					{% endif %}
+				</div>
+				{% endfor %}
+				<ul class="actions">
+					<li><input type="submit" value="Send Message" /></li>
+				</ul>
+			</form>
+			{% endif %}
+		</div>
+	</div>
+
+</main>
+{% endblock %}
