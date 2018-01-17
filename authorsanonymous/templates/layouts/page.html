@@ -1,9 +1,14 @@
 {% extends "layouts/base.html" %}
 
 {% load wagtailuserbar %}
+{% load wagtailmetadata_tags %}
 
 {% block title %}
 {{ page.seo_title|default:page.title }}
+{% endblock %}
+
+{% block extra_head %}
+{% meta_tags page %}
 {% endblock %}
 
 {% block footer %}

@@ -32,6 +32,7 @@ s3transfer==0.1.12        # via boto3
 six==1.11.0               # via html5lib, python-dateutil
 unidecode==0.4.21         # via wagtail
 urllib3==1.22             # via requests
+wagtail-metadata==0.3.1
 wagtail==1.13.1
 webencodings==0.5.1       # via html5lib
 willow==1.0               # via wagtail
