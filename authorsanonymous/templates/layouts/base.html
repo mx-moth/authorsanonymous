@@ -72,13 +72,13 @@
 							<li class="fa-envelope"><a href="mailto:{{ contact_details.email }}">{{ contact_details.email }}</a></li>
 						{% endif %}
 						{% if contact_details.facebook_url %}
-							<li class="fa-facebook"><a href="{{ contact_details.facebook_url}}">{{ contact_details.nice_facebook_url }}</a></li>
+							<li class="fa-facebook"><a href="{{ contact_details.facebook_url}}" target="_blank">{{ contact_details.nice_facebook_url }}</a></li>
 						{% endif %}
 						{% if contact_details.twitter_handle %}
-							<li class="fa-twitter"><a href="{{ contact_details.twitter_url }}">@{{ contact_details.twitter_handle }}</a></li>
+							<li class="fa-twitter"><a href="{{ contact_details.twitter_url }}" target="_blank">@{{ contact_details.twitter_handle }}</a></li>
 						{% endif %}
 						{% if contact_details.instagram_handle %}
-							<li class="fa-instagram"><a href="{{ contact_details.instagram_url }}">@{{ contact_details.instagram_handle }}</a></li>
+							<li class="fa-instagram"><a href="{{ contact_details.instagram_url }}" target="_blank">@{{ contact_details.instagram_handle }}</a></li>
 						{% endif %}
 					</ul>
 					<ul class="copyright">
