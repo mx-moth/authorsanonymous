@@ -29,3 +29,5 @@ DATABASES = {
 
 EMAIL_BACKEND = 'django_ses.SESBackend'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ['DJANGO_FROM_EMAIL']
+
+WAGTAIL_SITE_NAME = "E.J. Kellett"
