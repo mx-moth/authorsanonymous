@@ -5,6 +5,7 @@ from wagtail.contrib.settings.registry import register_setting
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, FieldRowPanel, MultiFieldPanel, StreamFieldPanel)
 from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from authorsanonymous.blocks import ContentPageBlocks, FancyPageBlocks
 from authorsanonymous.page import Page
@@ -122,6 +123,11 @@ class SiteCopy(BaseSetting):
         max_length=255, blank=False, default="Your Name Here",
         help_text="Copyright statement in the footer")
 
+    body_background = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True, blank=True, related_name='+', on_delete=models.SET_NULL,
+        help_text="Default background image for all pages")
+
     contact_title = models.CharField(default="Get in touch", max_length=50)
     contact_body = RichTextField()
 
@@ -132,4 +138,5 @@ class SiteCopy(BaseSetting):
             FieldPanel('contact_body'),
         ], 'Contact form'),
         FieldPanel('copyright'),
+        ImageChooserPanel('body_background')
     ]

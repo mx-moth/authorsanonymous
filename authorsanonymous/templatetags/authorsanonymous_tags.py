@@ -85,3 +85,16 @@ class PageUrlBlockNode(template.Node):
 
 
 register.tag(PageUrlBlockNode.start_tag, PageUrlBlockNode.parse)
+
+
+@register.simple_tag(takes_context=True)
+def body_background(context, page):
+    image = page.body_background
+    if not image:
+        site_copy = context['settings']['authorsanonymous']['SiteCopy']
+        image = site_copy.body_background
+
+    if image:
+        return image.get_rendition('max-1920x1080')
+
+    return None

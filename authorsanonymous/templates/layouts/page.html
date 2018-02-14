@@ -2,6 +2,7 @@
 
 {% load wagtailuserbar %}
 {% load wagtailmetadata_tags %}
+{% load authorsanonymous_tags %}
 
 {% block title %}
 {{ page.seo_title|default:page.title }}
@@ -10,6 +11,13 @@
 {% block extra_head %}
 {% meta_tags page %}
 {% endblock %}
+
+{% block body_attrs %} {% spaceless %}
+{% body_background page as img %}
+{% if img %}
+class="has_background" style="background-image: url('{{ img.url }}')"
+{% endif %}
+{% endspaceless %}{% endblock %}
 
 {% block footer %}
 {% wagtailuserbar %}
