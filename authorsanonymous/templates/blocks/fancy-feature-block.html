@@ -7,9 +7,13 @@
 		{% pageurl value.link fallback=None as href %}
 
 		{% if image and href %}
-        <a href="{{ href }}" class="image"><img src="{{ image.url }}"></a>
-		{% elif image %}
+		<a href="{{ href }}" class="image">
 			<img src="{{ image.url }}">
+		</a>
+		{% elif image %}
+		<span class="image">
+			<img src="{{ image.url }}">
+		</span>
 		{% endif %}
 		<div class="content">
 			<h2 class="major">{{ value.title }}</h2>
