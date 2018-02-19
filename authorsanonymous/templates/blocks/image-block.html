@@ -1,0 +1,8 @@
+{% load wagtailimages_tags %}
+<span class="image {{ value.align }}">
+    {% if value.align == 'fit' %}
+        {% image value.image width-1210 %}
+    {% else %}
+        {% image value.image width-484 %}
+    {% endif %}
+</span>
