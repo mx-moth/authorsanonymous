@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.settings',
     'wagtail.contrib.wagtailroutablepage',
+    'wagtailfontawesome',
     'wagtailmetadata',
     'modelcluster',
     'taggit',

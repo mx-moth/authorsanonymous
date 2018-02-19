@@ -13,7 +13,6 @@ services:
 
         volumes:
             - './authorsanonymous:/app/authorsanonymous'
-            - './Makefile:/app/Makefile'
             - './manage.py:/app/manage.py'
             - './data/:/app/data/'
             - './deploy:/app/deploy/'
