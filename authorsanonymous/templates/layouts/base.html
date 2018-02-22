@@ -8,6 +8,7 @@
 		<title>{% block title %}{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 		{% block extra_head %}{% endblock %}
 	</head>
     <body{% block body_attrs %}{% endblock %}>
@@ -63,23 +64,29 @@
 					{% endif %}
 					<ul class="contact">
 						{% if contact_details.address %}
-							<li class="fa-home">{{ contact_details.address|linebreaksbr }}</li>
+							<li><i class="far fa-home"></i>{{ contact_details.address|linebreaksbr }}</li>
 						{% endif %}
 						{% if contact_details.phone %}
-							<li class="fa-phone">{{ contact_details.phone }}</li>
+							<li><i class="far fa-phone"></i>{{ contact_details.phone }}</li>
 						{% endif %}
 						{% if contact_details.email and contact_details.email_public %}
-							<li class="fa-envelope"><a href="mailto:{{ contact_details.email }}">{{ contact_details.email }}</a></li>
+							<li><i class="fas fa-envelope"></i> <a href="mailto:{{ contact_details.email }}">{{ contact_details.email }}</a></li>
 						{% endif %}
 						{% if contact_details.facebook_url %}
-							<li class="fa-facebook"><a href="{{ contact_details.facebook_url}}" target="_blank">{{ contact_details.nice_facebook_url }}</a></li>
+							<li><i class="fab fa-facebook"></i> <a href="{{ contact_details.facebook_url}}" target="_blank">{{ contact_details.nice_facebook_url }}</a></li>
+						{% endif %}
+						{% if contact_details.goodreads_url %}
+							<li><i class="fab fa-goodreads"></i> <a href="{{ contact_details.goodreads_url}}" target="_blank">Goodreads</a></li>
 						{% endif %}
 						{% if contact_details.twitter_handle %}
-							<li class="fa-twitter"><a href="{{ contact_details.twitter_url }}" target="_blank">@{{ contact_details.twitter_handle }}</a></li>
+							<li><i class="fab fa-twitter"></i> <a href="{{ contact_details.twitter_url }}" target="_blank">@{{ contact_details.twitter_handle }}</a></li>
 						{% endif %}
 						{% if contact_details.instagram_handle %}
-							<li class="fa-instagram"><a href="{{ contact_details.instagram_url }}" target="_blank">@{{ contact_details.instagram_handle }}</a></li>
+							<li><i class="fab fa-instagram"></i> <a href="{{ contact_details.instagram_url }}" target="_blank">@{{ contact_details.instagram_handle }}</a></li>
 						{% endif %}
+						{% for extra_account in contact_details.extra_accounts.all %}
+						<li><i class="far {{ extra_account.icon }}"></i> <a href="{{ extra_account.url }}" target="_blank">{{ extra_account.text }}</a></li>
+						{% endfor %}
 					</ul>
 					<ul class="copyright">
 						<li>&copy; {{ settings.authorsanonymous.SiteCopy.copyright }}</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>

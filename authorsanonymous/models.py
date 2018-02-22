@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.html import format_html
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
 from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel, FieldRowPanel, MultiFieldPanel, StreamFieldPanel)
+    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel)
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
@@ -69,8 +71,23 @@ class ContentPage(Page):
     ]
 
 
+class ExtraAccounts(models.Model):
+    setting = ParentalKey(
+        'ContactDetails', related_name='extra_accounts',
+        on_delete=models.CASCADE)
+    icon = ChoiceField(
+        "Icon", max_length=40, choices=FONT_AWESOME_ICONS,
+        help_text=format_html(
+            "See <a href='{}'>Font Awesome</a> for the list of available icons.",
+            "http://fontawesome.io/icons/",
+        )
+    )
+    text = models.CharField(max_length=50)
+    url = models.URLField()
+
+
 @register_setting
-class ContactDetails(BaseSetting):
+class ContactDetails(ClusterableModel, BaseSetting):
     email = models.EmailField(blank=True)
     email_public = models.BooleanField(default=False)
     address = models.TextField(blank=True)
@@ -78,6 +95,7 @@ class ContactDetails(BaseSetting):
     facebook_url = models.URLField(blank=True)
     twitter_handle = models.CharField(blank=True, max_length=20)
     instagram_handle = models.CharField(blank=True, max_length=20)
+    goodreads_url = models.URLField(blank=True)
 
     panels = [
         MultiFieldPanel([
@@ -87,10 +105,14 @@ class ContactDetails(BaseSetting):
             ]),
             FieldPanel('address'),
             FieldPanel('phone'),
+        ], "Contact details"),
+        MultiFieldPanel([
             FieldPanel('facebook_url'),
             FieldPanel('twitter_handle'),
             FieldPanel('instagram_handle'),
-        ], "Contact details"),
+            FieldPanel('goodreads_url'),
+        ], 'Social media accounts'),
+        InlinePanel('extra_accounts', label='Extra accounts'),
     ]
 
     @property
