@@ -10,8 +10,8 @@ from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from authorsanonymous.blocks import ContentPageBlocks, FancyPageBlocks
+from authorsanonymous.icons import FONT_AWESOME_ICONS
 from authorsanonymous.page import Page
-from authorsanonymous.utils import FONT_AWESOME_ICONS
 
 
 class StreamField(StreamField):
