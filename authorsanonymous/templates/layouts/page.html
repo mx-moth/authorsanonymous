@@ -12,12 +12,7 @@
 {% meta_tags page %}
 {% endblock %}
 
-{% block body_attrs %} {% spaceless %}
-{% body_background page as img %}
-{% if img %}
-class="has_background" style="background-image: url('{{ img.url }}')"
-{% endif %}
-{% endspaceless %}{% endblock %}
+{% block body_attrs %}{% endblock %}
 
 {% block footer %}
 {% wagtailuserbar %}

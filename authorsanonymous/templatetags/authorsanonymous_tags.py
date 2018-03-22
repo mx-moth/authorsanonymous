@@ -1,4 +1,5 @@
 from django import template
+from django.utils.html import format_html, mark_safe
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import pageurl
 
@@ -88,13 +89,23 @@ register.tag(PageUrlBlockNode.start_tag, PageUrlBlockNode.parse)
 
 
 @register.simple_tag(takes_context=True)
-def body_background(context, page):
+def body_background(context, page, **kwargs):
+    cls = kwargs.pop('class', '')
+    style = kwargs.pop('style', '')
+    if kwargs:
+        raise TypeError(
+            "'{}' is an invalid keyword argument for this function".format(
+                next(kwargs.keys())))
+
     image = page.body_background
     if not image:
         site_copy = context['settings']['authorsanonymous']['SiteCopy']
         image = site_copy.body_background
 
     if image:
-        return image.get_rendition('max-1920x1080')
+        rendition = image.get_rendition('max-1920x1080')
+        cls = '{} {}'.format(cls, 'has-banner').strip()
+        style = 'background-image: url({}); {}'.format(
+            rendition.url, style).strip()
 
-    return None
+    return mark_safe(format_html('class="{}" style="{}"', cls, style).strip())

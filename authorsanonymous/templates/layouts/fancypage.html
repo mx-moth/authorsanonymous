@@ -1,12 +1,13 @@
 {% extends "layouts/page.html" %}
 
 {% load wagtailcore_tags %}
+{% load authorsanonymous_tags %}
 
 {% block page_header_class %}alt{% endblock %}
 
 {% block content %}
 
-<section class="banner">
+<section {% body_background page class="banner" %}>
 	<div class="inner">
 		<div class="logo"><span class="icon {{ page.header_icon }}"></span></div>
 		<h2>{{ page.header_text }}</h2>

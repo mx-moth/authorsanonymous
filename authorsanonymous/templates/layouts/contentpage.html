@@ -1,10 +1,11 @@
 {% extends "layouts/page.html" %}
 
 {% load wagtailcore_tags %}
+{% load authorsanonymous_tags %}
 
 {% block content %}
 <main>
-	<header>
+    <header {% body_background page %}>
 		<div class="inner">
 			<h2>{{ page.header_text }}</h2>
 			{{ page.header_body|richtext }}

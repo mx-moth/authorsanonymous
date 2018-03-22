@@ -1622,13 +1622,8 @@
 	}
 
 	body {
-		background-color: #2e3141;
-		background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8));
-	}
-	body.has_background {
-		background-size: cover;
-		background-attachment: fixed;
-		background-position: center;
+		background-size: auto;
+		background-color: #1d1f29;
 	}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -3062,8 +3057,14 @@
 
 /* Banner */
 
+	.has-banner {
+		background-size: cover;
+		background-position: center center;
+	}
+
 	.banner {
-		padding: 10em 0 4.75em 0 ;
+		padding: 10em 0 11.25em 0 ;
+		margin-bottom: -6.5em;
 	}
 
 		.banner .inner {
@@ -3232,7 +3233,8 @@
 /* Wrapper */
 
 	main > header {
-		padding: 11em 0 2.25em 0 ;
+		padding: 11em 0 8.75em 0 ;
+		margin-bottom: -6.5em;
 	}
 
 		main > header .inner {
