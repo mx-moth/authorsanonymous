@@ -1724,7 +1724,7 @@
 	}
 
 	p {
-		margin: 0 0 2em 0;
+		margin: 0 0 1em 0;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -2152,6 +2152,7 @@
 
 			.image.left img, .image.right img {
 				width: 100%;
+				height: auto;
 			}
 
 		.image.left {
@@ -3059,7 +3060,7 @@
 
 	.has-banner {
 		background-size: cover;
-		background-position: center center;
+		background-position: center center center;
 	}
 
 	.banner {
@@ -3151,10 +3152,6 @@
 
 			.banner {
 				padding: 7em 0 8.25em 0 ;
-				background-color: #2e3141;
-				background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../images/bg.jpg");
-				background-size: auto, cover;
-				background-position: center, center;
 				margin-bottom: -6.5em;
 			}
 
@@ -3847,4 +3844,8 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.block-text + .block-text {
+	clear: both;
 }
