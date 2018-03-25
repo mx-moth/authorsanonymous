@@ -162,3 +162,8 @@ class SiteCopy(BaseSetting):
         FieldPanel('copyright'),
         ImageChooserPanel('body_background')
     ]
+
+
+@register_setting
+class SiteSettings(BaseSetting):
+    google_analytics_id = models.CharField(max_length=20)
