@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import authorsanonymous.models
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='fancypage',
             name='header_body',
-            field=wagtail.wagtailcore.fields.RichTextField(verbose_name='Text'),
+            field=wagtail.core.fields.RichTextField(verbose_name='Text'),
         ),
         migrations.AlterField(
             model_name='fancypage',

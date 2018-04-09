@@ -4,8 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.functional import lazy
 from django.utils.html import format_html
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtailmetadata.models import MetadataPageMixin
 
 

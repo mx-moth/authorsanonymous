@@ -1,6 +1,6 @@
-import wagtail.wagtailadmin.urls
-import wagtail.wagtailcore.urls
-import wagtail.wagtaildocs.urls
+import wagtail.admin.urls
+import wagtail.core.urls
+import wagtail.documents.urls
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
@@ -11,11 +11,11 @@ from . import views
 urlpatterns = [
     url(r'^robots.txt$', TemplateView.as_view(content_type='text/plain',
                                               template_name='robots.txt')),
-    url(r'^admin/', include(wagtail.wagtailadmin.urls)),
-    url(r'^documents/', include(wagtail.wagtaildocs.urls)),
+    url(r'^admin/', include(wagtail.admin.urls)),
+    url(r'^documents/', include(wagtail.documents.urls)),
     url(r'^contact/$', views.contact_form, name='contact'),
 
-    url(r'', include(wagtail.wagtailcore.urls)),
+    url(r'', include(wagtail.core.urls)),
 ]
 
 

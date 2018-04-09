@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import authorsanonymous.models
 from django.db import migrations, models
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='fancypage',
             name='header_body',
-            field=wagtail.wagtailcore.fields.RichTextField(default=''),
+            field=wagtail.core.fields.RichTextField(default=''),
             preserve_default=False,
         ),
         migrations.AddField(

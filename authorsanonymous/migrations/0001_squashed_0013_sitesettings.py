@@ -6,7 +6,7 @@ import authorsanonymous.models
 from django.db import migrations, models
 import django.db.models.deletion
 import modelcluster.fields
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('body', authorsanonymous.models.StreamField([])),
-                ('header_body', wagtail.wagtailcore.fields.RichTextField(default='', verbose_name='Text')),
+                ('header_body', wagtail.core.fields.RichTextField(default='', verbose_name='Text')),
                 ('header_text', models.CharField(default='', max_length=255, verbose_name='Title')),
                 ('search_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
                 ('body_background', models.ForeignKey(blank=True, help_text="Background image for this page. If not set, the background image in the <a href='/admin/settings/authorsanonymous/sitecopy/'>site copy</a> will be used instead.", null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
                 ('body', authorsanonymous.models.StreamField([])),
-                ('header_body', wagtail.wagtailcore.fields.RichTextField(verbose_name='Text')),
+                ('header_body', wagtail.core.fields.RichTextField(verbose_name='Text')),
                 ('header_text', models.CharField(max_length=255, verbose_name='Title')),
                 ('header_icon', authorsanonymous.models.ChoiceField(help_text="See <a href='http://fontawesome.io/icons/'>Font Awesome</a> for the list of available icons.", max_length=40, verbose_name='Icon')),
                 ('search_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
                 ('site_title', models.CharField(default='Authors Anonymous', help_text='The title shown at the very top of content pages.', max_length=255)),
                 ('copyright', models.CharField(default='Your Name Here', help_text='Copyright statement in the footer', max_length=255)),
                 ('site', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
-                ('contact_body', wagtail.wagtailcore.fields.RichTextField(default='')),
+                ('contact_body', wagtail.core.fields.RichTextField(default='')),
                 ('contact_title', models.CharField(default='Get in touch', max_length=50)),
                 ('body_background', models.ForeignKey(blank=True, help_text='Default background image for all pages', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
             ],

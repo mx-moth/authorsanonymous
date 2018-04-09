@@ -2,9 +2,9 @@ from functools import total_ordering
 
 from django.template.loader import render_to_string
 from django.utils.html import mark_safe
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core import blocks
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
 
 
 class StreamBlock(blocks.StreamBlock):
@@ -71,7 +71,7 @@ class ImageBlock(blocks.StructBlock):
 
 class HTMLBlock(blocks.TextBlock):
     class Meta:
-        icon = 'fa-code'
+        icon = 'code'
         label = "Raw HTML"
 
     def render_basic(self, value, context=None):
@@ -98,6 +98,7 @@ class FancyFeatureBlock(blocks.StructBlock):
 
     class Meta:
         template = 'blocks/fancy-feature-block.html'
+        icon = 'wagtail'
 
 
 class FancyContentBlock(blocks.StructBlock):
@@ -106,6 +107,7 @@ class FancyContentBlock(blocks.StructBlock):
 
     class Meta:
         template = 'blocks/fancy-content-block.html'
+        icon = 'pilcrow'
 
 
 class FancyPageBlocks(StreamBlock):

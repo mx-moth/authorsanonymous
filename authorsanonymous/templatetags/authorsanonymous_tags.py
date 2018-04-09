@@ -1,7 +1,7 @@
 from django import template
 from django.utils.html import format_html, mark_safe
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.templatetags.wagtailcore_tags import pageurl
+from wagtail.core.models import Page
+from wagtail.core.templatetags.wagtailcore_tags import pageurl
 
 register = template.Library()
 

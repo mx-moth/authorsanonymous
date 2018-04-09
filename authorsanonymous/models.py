@@ -2,12 +2,12 @@ from django.db import models
 from django.utils.html import format_html
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
+from wagtail.admin.edit_handlers import (
+    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel)
 from wagtail.contrib.settings.models import BaseSetting
 from wagtail.contrib.settings.registry import register_setting
-from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel)
-from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.images.edit_handlers import ImageChooserPanel
 
 from authorsanonymous.blocks import ContentPageBlocks, FancyPageBlocks
 from authorsanonymous.icons import FONT_AWESOME_ICONS
