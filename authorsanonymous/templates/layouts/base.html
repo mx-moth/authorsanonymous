@@ -100,10 +100,6 @@
 		{% block footer %}{% endblock %}
 
 		{% block scripts %}
-		<script src="{% static 'js/skel.min.js' %}"></script>
-		<script src="{% static 'js/jquery.min.js' %}"></script>
-		<script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
-		<script src="{% static 'js/util.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
 		{% with google_analytics_id=settings.authorsanonymous.SiteSettings.google_analytics_id %}
 			{% if not debug and not request.is_preview and google_analytics_id %}

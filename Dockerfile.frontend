@@ -1,0 +1,11 @@
+# vim:syntax=dockerfile
+FROM node:8-stretch
+
+ENV NPM_CONFIG_LOGLEVEL=warn
+
+WORKDIR /app/
+COPY package.json yarn.lock /app/
+
+RUN yarn && \
+    yarn cache clean && \
+    true

@@ -1,10 +1,23 @@
 version: '2'
 
 services:
+    frontend:
+        build:
+            context: .
+            dockerfile: Dockerfile.frontend
+
+        volumes:
+            - './design:/app/design'
+            - './authorsanonymous/static:/app/static'
+            - './package.json:/app/package.json'
+            - './yarn.lock:/app/yarn.lock'
+
+        command: npm run watch
+
     backend:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.backend
 
         command: ./manage.py runserver 0.0.0.0:8000
 
@@ -26,6 +39,7 @@ services:
 
         links:
             - mail
+            - frontend
 
     database:
         image: postgres
