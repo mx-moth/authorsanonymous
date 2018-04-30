@@ -1,5 +1,23 @@
-# vim: syntax=dockerfile
-FROM alpine
+# Frontend asset build
+FROM node:8-stretch as frontend
+
+ENV NPM_CONFIG_LOGLEVEL=warn
+
+RUN mkdir /app
+WORKDIR /app/
+COPY package.json yarn.lock /app/
+
+RUN yarn && \
+    yarn cache clean && \
+    true
+
+COPY ./design/ /app/design/
+
+RUN npm run build
+CMD ["npm", "run", "watch"]
+
+# Backend build
+FROM alpine as backend
 MAINTAINER Tim Heap <tim@timheap.me>
 
 RUN mkdir /app
@@ -15,9 +33,8 @@ RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
 COPY requirements.in requirements.txt /app/
 RUN pip3 install --no-cache-dir pyinotify -r requirements.txt
 
-COPY ./authorsanonymous /app/authorsanonymous
-COPY ./deploy /app/deploy
-COPY ./manage.py /app/manage.py
+COPY ./authorsanonymous ./deploy ./manage.py /app/
+COPY --from=frontend /app/static /app/authorsanonymous/static
 RUN ln -fs /app/deploy/settings.py /app/settings.py
 
 ENV PYTHONUNBUFFERED=1 \
