@@ -1,3 +1,4 @@
+import mailchimp3
 from django.db import models
 from django.utils.html import format_html
 from modelcluster.fields import ParentalKey
@@ -86,7 +87,7 @@ class ExtraAccounts(models.Model):
     url = models.URLField()
 
 
-@register_setting
+@register_setting(icon='link')
 class ContactDetails(ClusterableModel, BaseSetting):
     email = models.EmailField(blank=True)
     email_public = models.BooleanField(default=False)
@@ -136,7 +137,7 @@ class ContactDetails(ClusterableModel, BaseSetting):
         return 'https://instagram.com/{}'.format(self.instagram_handle)
 
 
-@register_setting
+@register_setting(icon='pilcrow')
 class SiteCopy(BaseSetting):
     site_title = models.CharField(
         max_length=255, blank=False, default="Authors Anonymous",
@@ -153,17 +154,40 @@ class SiteCopy(BaseSetting):
     contact_title = models.CharField(default="Get in touch", max_length=50)
     contact_body = RichTextField()
 
+    newsletter_title = models.CharField(
+        default="Subscribe to our newsletter", max_length=50)
+    newsletter_body = RichTextField(
+        default=(
+            """
+            <p>Subscribe to our mailing list to receive all our news in your
+            inbox</p>
+            """))
+
     panels = [
         FieldPanel('site_title'),
         MultiFieldPanel([
             FieldPanel('contact_title'),
             FieldPanel('contact_body'),
         ], 'Contact form'),
+        MultiFieldPanel([
+            FieldPanel('newsletter_title'),
+            FieldPanel('newsletter_body'),
+        ], 'Newsletter form'),
         FieldPanel('copyright'),
         ImageChooserPanel('body_background')
     ]
 
 
-@register_setting
+@register_setting(icon='site')
 class SiteSettings(BaseSetting):
     google_analytics_id = models.CharField(max_length=20)
+
+
+@register_setting(icon='mail')
+class MailchimpSettings(BaseSetting):
+    api_key = models.CharField(max_length=60)
+
+    newsletter_list = models.CharField(max_length=30, blank=True)
+
+    def get_client(self):
+        return mailchimp3.MailChimp(mc_api=self.api_key)

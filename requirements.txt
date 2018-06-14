@@ -23,12 +23,13 @@ draftjs-exporter==2.0.0   # via wagtail
 html5lib==0.999999999     # via wagtail
 idna==2.6                 # via requests
 jmespath==0.9.3           # via boto3, botocore
-olefile==0.43             # via pillow
+mailchimp3==3.0.2
+olefile==0.43
 pillow==4.3.0
 psycopg2==2.7.4
 python-dateutil==2.6.1    # via botocore
 pytz==2017.3              # via django, django-modelcluster, django-ses
-requests==2.18.4          # via wagtail
+requests==2.18.4          # via mailchimp3, wagtail
 s3transfer==0.1.12        # via boto3
 six==1.11.0               # via html5lib, python-dateutil
 unidecode==0.4.21         # via wagtail

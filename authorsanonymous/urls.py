@@ -15,6 +15,13 @@ urlpatterns = [
     url(r'^documents/', include(wagtail.documents.urls)),
     url(r'^contact/$', views.contact_form, name='contact'),
 
+    url(r'^_api/contact/$',
+        views.contact_submit,
+        name='contact_submit'),
+    url(r'^_api/newsletter_signup/$',
+        views.newsletter_submit,
+        name='newsletter_signup'),
+
     url(r'', include(wagtail.core.urls)),
 ]
 

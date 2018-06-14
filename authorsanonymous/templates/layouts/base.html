@@ -45,11 +45,14 @@
 			<footer class="page-footer">
 				<div class="inner">
 					{% with contact_details=settings.authorsanonymous.ContactDetails %}
+
+					{% if contact_details.email and show_contact_form %}
+					<div class="contact">
 					<h2 class="major">{{ settings.authorsanonymous.SiteCopy.contact_title }}</h2>
 					{{ settings.authorsanonymous.SiteCopy.contact_body|richtext }}
 
-					{% if contact_details.email and show_contact_form %}
-					<form method="post" action="{% url "contact" %}">
+					<form method="post" action="{% url "contact_submit" %}" id="contact" data-prefix="{{ contact_form.prefix }}">
+
 						{% csrf_token %}
 						{% for field in contact_form %}
 						<div class="field">
@@ -58,11 +61,33 @@
 						</div>
 						{% endfor %}
 						<ul class="actions">
-							<li><input type="submit" value="Send Message" /></li>
+							<li><input type="submit" value="Send message" /></li>
 						</ul>
 					</form>
+					</div>
 					{% endif %}
-					<ul class="contact">
+
+					<div class="follow">
+						{% if show_newsletter_form %}
+						<h2 class="major">{{ settings.authorsanonymous.SiteCopy.newsletter_title }}</h2>
+						{{ settings.authorsanonymous.SiteCopy.newsletter_body|richtext }}
+						<form method="post" action="{% url "newsletter_signup" %}" id="newsletter" data-prefix="{{ newsletter_form.prefix }}">
+
+							{% csrf_token %}
+							{% for field in newsletter_form %}
+							<div class="field">
+								<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+								{{ field }}
+							</div>
+							{% endfor %}
+							<ul class="actions">
+								<li><input type="submit" value="Subscribe" /></li>
+							</ul>
+						</form>
+						{% endif %}
+
+						<h2 class="major">Follow us</h2>
+						<ul>
 						{% if contact_details.address %}
 							<li><i class="far fa-home"></i>{{ contact_details.address|linebreaksbr }}</li>
 						{% endif %}
@@ -87,7 +112,9 @@
 						{% for extra_account in contact_details.extra_accounts.all %}
 						<li><i class="far {{ extra_account.icon }}"></i> <a href="{{ extra_account.url }}" target="_blank">{{ extra_account.text }}</a></li>
 						{% endfor %}
-					</ul>
+						</ul>
+
+					</div>
 					<ul class="copyright">
 						<li>&copy; {{ settings.authorsanonymous.SiteCopy.copyright }}</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>

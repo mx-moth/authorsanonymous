@@ -2,7 +2,13 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.html import format_html
 from wagtail.core import hooks
 
-hooks.register('insert_global_admin_js')
+from .forms import MailchimpSettingsForm
+from .models import MailchimpSettings
+
+MailchimpSettings.base_form_class = MailchimpSettingsForm
+
+
+@hooks.register('insert_global_admin_js')
 def global_admin_js():
     return format_html(
         '<script defer src="{}"></script>',

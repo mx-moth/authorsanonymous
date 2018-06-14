@@ -5,7 +5,12 @@
 */
 import $ from 'jquery';
 import { Menu } from './menu';
+import { NewsletterForm } from './newsletter';
+import { ContactForm } from './contact';
 
 $(function() {
     new Menu($('#menu'), $('body'));
+
+    NewsletterForm.fromElement($('#newsletter'));
+    ContactForm.fromElement($('#contact'));
 });

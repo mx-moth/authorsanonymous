@@ -1,7 +1,6 @@
 """
 Base Django settings for Authors Anonymous
 """
-import os
 from pathlib import Path, PurePosixPath
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -68,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'wagtail.contrib.settings.context_processors.settings',
                 'authorsanonymous.context_processors.contact_form',
+                'authorsanonymous.context_processors.newsletter_form',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
