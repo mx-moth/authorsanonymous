@@ -9,7 +9,7 @@ ALLOWED_HOSTS = ['aa.vcap.me', '*', 'localhost']
 INTERNAL_IPS = ['127.0.0.1', '172.19.0.1']
 BASE_URL = 'http://aa.vcap.me'
 
-DATA_ROOT = '/app/data/'
+DATA_ROOT = '/opt/backend/data/'
 
 DATABASES = {
     'default': parse('postgres://postgres@database/postgres'),

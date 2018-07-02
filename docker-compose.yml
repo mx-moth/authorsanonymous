@@ -1,55 +1,48 @@
 version: '2.3'
 
 services:
-    frontend:
-        build:
-            context: .
-            dockerfile: Dockerfile
-            target: frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend
 
-        volumes:
-            - './design:/app/design'
-            - './authorsanonymous/static:/app/static'
-            - './package.json:/app/package.json'
-            - './yarn.lock:/app/yarn.lock'
+    volumes:
+      - './design:/opt/frontend/design'
+      - './static:/opt/frontend/static'
+      - './package.json:/opt/frontend/package.json'
+      - './yarn.lock:/opt/frontend/yarn.lock'
 
-        command: npm run watch
+    command: npm run watch
 
-    backend:
-        build:
-            context: .
-            dockerfile: Dockerfile
-            target: backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
 
-        command: ./manage.py runserver 0.0.0.0:8000
+    command: ./manage.py runserver 0.0.0.0:8000
 
-        ports:
-            - '80:8000'
+    ports:
+      - '80:8000'
 
-        volumes:
-            - './authorsanonymous:/app/authorsanonymous'
-            - './manage.py:/app/manage.py'
-            - './data/:/app/data/'
-            - './deploy:/app/deploy/'
-            - './dev/settings.py:/app/devsettings.py'
+    volumes:
+      - '.:/opt/backend'
 
-        environment:
-            - 'DJANGO_SETTINGS_MODULE=devsettings'
+    environment:
+      - 'DJANGO_SETTINGS_MODULE=dev.settings'
 
-        depends_on:
-            - database
+    depends_on:
+      - database
 
-        links:
-            - mail
-            - frontend
+    links:
+      - mail
+      - frontend
 
-    database:
-        image: postgres
-        ports:
-            - '5432:5432'
+  database:
+    image: postgres
 
-
-    mail:
-        image: djfarrelly/maildev
-        ports:
-            - "9000:80"
+  mail:
+    image: djfarrelly/maildev
+    ports:
+      - "9000:80"

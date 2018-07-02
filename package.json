@@ -6,7 +6,7 @@
     "author": "Tim Heap",
     "repository": {
         "type": "git",
-        "dist.url": "git@github.com:timheap/authorsanonymous.git"
+        "url": "git@github.com:timheap/authorsanonymous.git"
     },
     "scripts": {
         "clean": "rimraf $npm_package_config_static/*",
@@ -79,10 +79,7 @@
             }
         },
         "rules": {
-            "indent": [
-                1,
-                4
-            ],
+            "indent": ["error", "tab"],
             "comma-style": [
                 2,
                 "last"

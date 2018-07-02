@@ -3,7 +3,6 @@ import os
 from dj_database_url import parse
 
 from authorsanonymous.settings import *  # noqa
-from authorsanonymous.settings import INSTALLED_APPS
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 DEBUG = bool(int(os.environ['DJANGO_DEBUG']))
