@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block title %}404 Page not found{% endblock %}
+
+{% block content %}
+<main>
+	<header>
+		<div class="inner">
+			<h2>404 Page not found</h2>
+		</div>
+	</header>
+
+	<div class="wrapper">
+		<div class="inner">
+			<p>Sorry, the page <strong>{{ request.build_absolute_uri }}</strong> was not found</p>
+		</div>
+	</div>
+
+</main>
+{% endblock %}
