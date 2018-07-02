@@ -1,4 +1,5 @@
 from django import template
+from django.template.exceptions import TemplateSyntaxError
 from django.utils.html import format_html, mark_safe
 from wagtail.core.models import Page
 from wagtail.core.templatetags.wagtailcore_tags import pageurl
