@@ -4,37 +4,91 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-beautifulsoup4==4.6.0     # via wagtail
+beautifulsoup4==4.6.0
+    # via wagtail
+boto==2.48.0
+    # via django-ses
 boto3==1.5.8
-boto==2.48.0              # via django-ses
-botocore==1.8.22          # via boto3, s3transfer
-certifi==2017.11.5        # via requests
-chardet==3.0.4            # via requests
+    # via -r requirements.in
+botocore==1.8.22
+    # via
+    #   boto3
+    #   s3transfer
+certifi==2022.12.7
+    # via requests
+chardet==3.0.4
+    # via requests
 dj-database-url==0.5.0
-django-modelcluster==4.1  # via wagtail
-django-ses==0.8.4
-django-storages==1.6.5
-django-taggit==0.22.2     # via wagtail
-django-treebeard==4.2.0   # via wagtail
+    # via -r requirements.in
 django==2.0.4
-djangorestframework==3.8.2  # via wagtail
-docutils==0.14            # via botocore
-draftjs-exporter==2.0.0   # via wagtail
-html5lib==0.999999999     # via wagtail
-idna==2.6                 # via requests
-jmespath==0.9.3           # via boto3, botocore
+    # via
+    #   -r requirements.in
+    #   django-treebeard
+    #   wagtail
+django-modelcluster==4.1
+    # via wagtail
+django-ses==0.8.4
+    # via -r requirements.in
+django-storages==1.6.5
+    # via -r requirements.in
+django-taggit==0.22.2
+    # via wagtail
+django-treebeard==4.2.0
+    # via wagtail
+djangorestframework==3.8.2
+    # via wagtail
+docutils==0.14
+    # via botocore
+draftjs-exporter==2.0.0
+    # via wagtail
+html5lib==0.999999999
+    # via wagtail
+idna==2.6
+    # via requests
+jmespath==0.9.3
+    # via
+    #   boto3
+    #   botocore
 mailchimp3==3.0.2
+    # via -r requirements.in
 olefile==0.43
+    # via
+    #   -r requirements.in
+    #   pillow
 pillow==4.3.0
+    # via
+    #   -r requirements.in
+    #   wagtail
 psycopg2==2.7.4
-python-dateutil==2.6.1    # via botocore
-pytz==2017.3              # via django, django-modelcluster, django-ses
-requests==2.18.4          # via mailchimp3, wagtail
-s3transfer==0.1.12        # via boto3
-six==1.11.0               # via html5lib, python-dateutil
-unidecode==0.4.21         # via wagtail
-urllib3==1.22             # via requests
-wagtail-metadata==2.0.0
+    # via -r requirements.in
+python-dateutil==2.6.1
+    # via botocore
+pytz==2017.3
+    # via
+    #   django
+    #   django-modelcluster
+    #   django-ses
+requests==2.18.4
+    # via
+    #   mailchimp3
+    #   wagtail
+s3transfer==0.1.12
+    # via boto3
+six==1.11.0
+    # via
+    #   html5lib
+    #   python-dateutil
+unidecode==0.4.21
+    # via wagtail
+urllib3==1.22
+    # via requests
 wagtail==2.0.1
-webencodings==0.5.1       # via html5lib
-willow==1.1               # via wagtail
+    # via
+    #   -r requirements.in
+    #   wagtail-metadata
+wagtail-metadata==2.0.0
+    # via -r requirements.in
+webencodings==0.5.1
+    # via html5lib
+willow==1.1
+    # via wagtail
